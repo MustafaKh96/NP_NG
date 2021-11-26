@@ -1,6 +1,7 @@
 package org.hbrs.se2.project.npng.model.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table( name = "student", schema = "Collab")
@@ -13,7 +14,7 @@ public class Student {
     private String highestDiploma;
     private String education;
     private String studyCourse;
-    private String birthday;
+    private LocalDate birthday;
 
     @Id
     @GeneratedValue
@@ -87,11 +88,11 @@ public class Student {
 
     @Basic
     @Column(name = "birthday")
-    public String getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 }

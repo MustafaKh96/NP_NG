@@ -1,4 +1,4 @@
-package org.hbrs.se2.project.npng.SeleniumTest;
+package org.hbrs.se2.project.npng.CollabTests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
