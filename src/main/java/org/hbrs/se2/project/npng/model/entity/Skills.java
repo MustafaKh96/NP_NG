@@ -1,36 +1,24 @@
 package org.hbrs.se2.project.npng.model.entity;
 
-import org.testng.annotations.Test;
-
 import javax.persistence.*;
+import java.math.BigInteger;
 
 @Entity
-@Table(name = "skills", schema = "Collab")
 public class Skills {
-
     private int id;
-    private int student_id;
-    private int job_advertisment_id;
     private String name;
-    private int grade;
+    private BigInteger grade;
+    private Student studentByStudentId;
+    private JobAdvertisement jobAdvertisementByJobAdvertisementId;
 
     @Id
-    @GeneratedValue
     @Column(name = "id")
     public int getId() {
         return id;
     }
 
-    @Basic
-    @Column(name = "student_id")
-    public int getStudent_id() {
-        return student_id;
-    }
-
-    @Basic
-    @Column(name = "job_advertisment_id")
-    public int getJob_advertisment_id() {
-        return job_advertisment_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Basic
@@ -39,31 +27,59 @@ public class Skills {
         return name;
     }
 
-    @Basic
-    @Column(name = "grade")
-    public int getGrade() {
-        return grade;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setStudent_id(int student_id) {
-        this.student_id = student_id;
-    }
-
-    public void setJob_advertisment_id(int job_advertisment_id) {
-        this.job_advertisment_id = job_advertisment_id;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setGrade(int grade) {
+    @Basic
+    @Column(name = "grade")
+    public BigInteger getGrade() {
+        return grade;
+    }
+
+    public void setGrade(BigInteger grade) {
         this.grade = grade;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        Skills skills = (Skills) o;
+
+        if (id != skills.id) return false;
+        if (name != null ? !name.equals(skills.name) : skills.name != null) return false;
+        if (grade != null ? !grade.equals(skills.grade) : skills.grade != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (grade != null ? grade.hashCode() : 0);
+        return result;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "student_id", referencedColumnName = "id", nullable = false)
+    public Student getStudentByStudentId() {
+        return studentByStudentId;
+    }
+
+    public void setStudentByStudentId(Student studentByStudentId) {
+        this.studentByStudentId = studentByStudentId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "job_advertisement_id", referencedColumnName = "id", nullable = false)
+    public JobAdvertisement getJobAdvertisementByJobAdvertisementId() {
+        return jobAdvertisementByJobAdvertisementId;
+    }
+
+    public void setJobAdvertisementByJobAdvertisementId(JobAdvertisement jobAdvertisementByJobAdvertisementId) {
+        this.jobAdvertisementByJobAdvertisementId = jobAdvertisementByJobAdvertisementId;
+    }
 }

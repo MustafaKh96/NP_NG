@@ -3,41 +3,56 @@ package org.hbrs.se2.project.npng.model.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "company_has_job_advertisement", schema = "Collab")
+@Table(name = "company_has_job_advertisement", schema = "Collab", catalog = "zmkass2s")
 public class CompanyHasJobAdvertisement {
-
     private int id;
-    private int company_id;
-    private int job_advertisment_id;
+    private Company companyByCompanyId;
+    private JobAdvertisement jobAdvertisementByJobAdvertisementId;
 
     @Id
-    @GeneratedValue
     @Column(name = "id")
-    public int getId(){
+    public int getId() {
         return id;
-    }
-
-    @Basic
-    @Column(name = "company_id")
-    public int getCompany_id() {
-        return company_id;
-    }
-
-    @Basic
-    @Column(name = "job_advertisment_id")
-    public int getJob_advertisment_id(){
-        return job_advertisment_id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setCompany_id(int company_id) {
-        this.company_id = company_id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CompanyHasJobAdvertisement that = (CompanyHasJobAdvertisement) o;
+
+        if (id != that.id) return false;
+
+        return true;
     }
 
-    public void setJob_advertisment_id(int job_advertisment_id) {
-        this.job_advertisment_id = job_advertisment_id;
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "company_id", referencedColumnName = "id", nullable = false)
+    public Company getCompanyByCompanyId() {
+        return companyByCompanyId;
+    }
+
+    public void setCompanyByCompanyId(Company companyByCompanyId) {
+        this.companyByCompanyId = companyByCompanyId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "job_advertisement_id", referencedColumnName = "id", nullable = false)
+    public JobAdvertisement getJobAdvertisementByJobAdvertisementId() {
+        return jobAdvertisementByJobAdvertisementId;
+    }
+
+    public void setJobAdvertisementByJobAdvertisementId(JobAdvertisement jobAdvertisementByJobAdvertisementId) {
+        this.jobAdvertisementByJobAdvertisementId = jobAdvertisementByJobAdvertisementId;
     }
 }

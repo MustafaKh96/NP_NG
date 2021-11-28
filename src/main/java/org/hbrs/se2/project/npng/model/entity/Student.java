@@ -1,39 +1,30 @@
 package org.hbrs.se2.project.npng.model.entity;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.sql.Date;
+import java.util.Collection;
 
 @Entity
-@Table( name = "student", schema = "Collab")
 public class Student {
-
     private int id;
-    private int user_id;
     private String firstName;
     private String lastName;
     private String highestDiploma;
     private String education;
     private String studyCourse;
-    private LocalDate birthday;
+    private Date birthday;
+    private Collection<ApplicationLetter> applicationLettersById;
+    private Collection<Skills> skillsById;
+    private User userByUserId;
 
     @Id
-    @GeneratedValue
+    @Column(name = "id")
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    @Basic
-    @Column(name = "user_id")
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
     }
 
     @Basic
@@ -88,12 +79,70 @@ public class Student {
 
     @Basic
     @Column(name = "birthday")
-    public LocalDate getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
-}
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Student student = (Student) o;
+
+        if (id != student.id) return false;
+        if (firstName != null ? !firstName.equals(student.firstName) : student.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(student.lastName) : student.lastName != null) return false;
+        if (highestDiploma != null ? !highestDiploma.equals(student.highestDiploma) : student.highestDiploma != null)
+            return false;
+        if (education != null ? !education.equals(student.education) : student.education != null) return false;
+        if (studyCourse != null ? !studyCourse.equals(student.studyCourse) : student.studyCourse != null) return false;
+        if (birthday != null ? !birthday.equals(student.birthday) : student.birthday != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (highestDiploma != null ? highestDiploma.hashCode() : 0);
+        result = 31 * result + (education != null ? education.hashCode() : 0);
+        result = 31 * result + (studyCourse != null ? studyCourse.hashCode() : 0);
+        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
+        return result;
+    }
+
+    @OneToMany(mappedBy = "studentByStudentId")
+    public Collection<ApplicationLetter> getApplicationLettersById() {
+        return applicationLettersById;
+    }
+
+    public void setApplicationLettersById(Collection<ApplicationLetter> applicationLettersById) {
+        this.applicationLettersById = applicationLettersById;
+    }
+
+    @OneToMany(mappedBy = "studentByStudentId")
+    public Collection<Skills> getSkillsById() {
+        return skillsById;
+    }
+
+    public void setSkillsById(Collection<Skills> skillsById) {
+        this.skillsById = skillsById;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    public User getUserByUserId() {
+        return userByUserId;
+    }
+
+    public void setUserByUserId(User userByUserId) {
+        this.userByUserId = userByUserId;
+    }
+}
