@@ -9,6 +9,8 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import org.hbrs.se2.project.npng.control.RegistrationControl;
+import org.hbrs.se2.project.npng.entities.Student;
 import org.hbrs.se2.project.npng.views.component.EmailTextField;
 import org.hbrs.se2.project.npng.views.component.PasswordTextField;
 import org.hbrs.se2.project.npng.views.component.RegistrationTextField;
@@ -19,6 +21,9 @@ import org.hbrs.se2.project.npng.views.layoutview.RegisterLayoutView;
 @CssImport("./themes/nopainnogain/components/Register.css")
 
 public class RegisterStudentView extends VerticalLayout {
+
+    Student student = new Student();
+    RegistrationControl registrationControl = new RegistrationControl();
 
     public RegisterStudentView(){
         setMargin(true);
@@ -57,6 +62,11 @@ public class RegisterStudentView extends VerticalLayout {
         zurueck.addClickListener(e -> navigateToRegisterStartseiteView());
         HorizontalLayout horizontalLayout = new HorizontalLayout();
         horizontalLayout.add(zurueck, registrieren);
+        registrieren.addClickListener(e -> {
+            student.setFirstName( vorname.getValue() );
+            student.setLastName( nachname.getValue());
+            registrationControl.studentRegistration(student);
+        });
 
 
         // Layout:
