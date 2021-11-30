@@ -8,6 +8,6 @@ public interface JobAdvertismentDTO {
     public String getSector();
     public String getTypOfJobHiring();
     public LocalDate getDate();
-    public String getDescritpion();
+    public String getDescription();
 
 }
