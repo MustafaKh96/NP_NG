@@ -4,7 +4,7 @@ import org.hbrs.se2.project.npng.dtos.JobAdvertismentDTO;
 
 import java.time.LocalDate;
 
-public class JobAdvertismentDTOImpl implements JobAdvertisementDTO {
+public class JobAdvertismentDTOImpl implements JobAdvertismentDTO {
 
     private String title;
     private String sector;
@@ -21,7 +21,7 @@ public class JobAdvertismentDTOImpl implements JobAdvertisementDTO {
         return sector;
     }
 
-    public String getType_of_job_hiring() {
+    public String getTypOfJobHiring() {
         return type_of_job_hiring;
     }
 
