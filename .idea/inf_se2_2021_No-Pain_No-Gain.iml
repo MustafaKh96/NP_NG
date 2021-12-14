@@ -16,6 +16,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="entityManagerFactory" />
+          <factory-entry name="inf_se2_2021_No-Pain_No-Gain" />
           <factory-entry name="noname-a.xml@0" value="8d252560-0f53-4e4d-8ebe-014316016984" />
         </datasource-mapping>
         <naming-strategy-map />
