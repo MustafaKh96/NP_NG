@@ -1,13 +1,14 @@
 package org.hbrs.se2.project.npng.repository;
 
-import org.hbrs.se2.project.npng.dtos.UserDTO;
+import org.hbrs.se2.project.npng.dto.UserDTO;
+import org.hbrs.se2.project.npng.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
 
-public interface UserRepository extends JpaRepository {
+@Component
+public interface UserRepository extends JpaRepository<User, Integer> {
 
-    // SELECT firstname, lastname, id
-    // FROM User p
-    // WHERE p.userid = [StringValueOf( userid )] AND p.password = [StringValueOf( password )]
-    UserDTO findUserByUseridAndPassword (String userid , String password);
 
+    UserDTO findUserByMailAndPassword (String eMail, String password);
+    UserDTO findUserByPassword(String password);
 }
