@@ -14,7 +14,7 @@ public class UserInsertRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
-    private EntityManagerFactory emFactory;
+    //private EntityManagerFactory emFactory;
 
     public UserInsertRepository(){
 
@@ -27,9 +27,9 @@ public class UserInsertRepository {
 
         entityManager.getTransaction().begin();
         this.entityManager.persist(user);
-        this.entityManager.flush();
+        entityManager.getTransaction().commit();
+        //this.entityManager.flush();
 
         entityManager.close();
-        emFactory.close();
     }
 }

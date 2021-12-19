@@ -2,6 +2,7 @@ package org.hbrs.se2.project.npng.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ public class Student {
     private String highestDiploma;
     private String education;
     private String studyCourse;
-    private Date birthday;
+    private LocalDate birthday;
     private List<ApplicationLetter> applicationLetters;
     private List<Skills> skills;
     private User user;
@@ -81,11 +82,11 @@ public class Student {
 
     @Basic
     @Column(name = "birthday")
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 

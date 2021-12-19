@@ -10,11 +10,17 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.hbrs.se2.project.npng.entity.Student;
 import org.hbrs.se2.project.npng.entity.User;
+import org.hbrs.se2.project.npng.repository.StudentRepository;
+import org.hbrs.se2.project.npng.repository.UserRepository;
 import org.hbrs.se2.project.npng.repository.impl.UserInsertRepository;
 import org.hbrs.se2.project.npng.view.component.EmailTextField;
 import org.hbrs.se2.project.npng.view.component.PasswordTextField;
 import org.hbrs.se2.project.npng.view.component.RegistrationTextField;
 import org.hbrs.se2.project.npng.view.layoutview.RegisterLayoutView;
+
+import java.sql.Date;
+import java.time.LocalDate;
+
 
 @Route(value = "RegisterStudent", layout = RegisterLayoutView.class)
 @PageTitle("No-Pain_No-Gain")
@@ -22,7 +28,14 @@ import org.hbrs.se2.project.npng.view.layoutview.RegisterLayoutView;
 
 public class RegisterStudentView extends VerticalLayout {
 
-    public RegisterStudentView(){
+    private UserRepository userRepository;
+    private StudentRepository studentRepository;
+
+    public RegisterStudentView(UserRepository userRepository, StudentRepository studentRepository){
+
+        this.userRepository = userRepository;
+        this.studentRepository = studentRepository;
+
         setMargin(true);
         setDefaultHorizontalComponentAlignment(Alignment.START);
 
@@ -63,19 +76,33 @@ public class RegisterStudentView extends VerticalLayout {
         registrieren.addClickListener(e->{
 
 
-            System.out.println("Erfolg");
+
+
+
+            User user = new User();
+            user.setPassword(password.getValue());
+            user.setMail(email.getValue());
+            user.setContactMail("");
+            user.setCity("");
+            user.setHouseNumber("");
+            user.setPhone("");
+            user.setPlz("");
+            user.setStreet("");
+            user.setRole(User.COMPANY);
+
+            user = userRepository.save(user);
+
             //TODO validation
             Student student = new Student();
             student.setFirstName(vorname.getValue());
             student.setLastName(nachname.getValue());
+            student.setBirthday(LocalDate.now());
+            student.setHighestDiploma("");
+            student.setEducation("");
+            student.setStudyCourse("");
+            student.setUser(user);
 
-            User user = new User();
-            user.setPassword(password.getValue());
-            user.setContactMail(email.getValue());
-            user.setStudent(student);
-
-            UserInsertRepository userInsertRep = new UserInsertRepository();
-            userInsertRep.insert(user);
+            studentRepository.save(student);
         });
 
 
