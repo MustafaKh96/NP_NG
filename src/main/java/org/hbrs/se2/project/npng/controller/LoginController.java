@@ -2,6 +2,7 @@ package org.hbrs.se2.project.npng.controller;
 
 import org.hbrs.se2.project.npng.controller.exception.DatabaseUserException;
 import org.hbrs.se2.project.npng.dto.UserDTO;
+import org.hbrs.se2.project.npng.entity.User;
 import org.hbrs.se2.project.npng.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,34 +13,30 @@ public class LoginController {
     @Autowired
     private UserRepository userRepository;
 
-    private UserDTO userDTO;
+    private User user;
 
     public boolean authentificate(String eMail, String password) throws DatabaseUserException {
-
-        this.userDTO = this.getUserWithJPA(eMail, password);
-
-        if (userDTO == null){
-
+        this.user = this.getUserWithJPA(eMail, password);
+        if (user == null){
             return false;
         }
         return true;
     }
 
-    public UserDTO getCurrentUser(){
-
-        return this.userDTO;
+    public User getCurrentUser(){
+        return this.user;
     }
 
-    public UserDTO getUserWithJPA (String eMail, String password) throws DatabaseUserException{
+    public User getUserWithJPA(String eMail, String password) throws DatabaseUserException{
 
-        UserDTO userDTO;
+        User myUser;
         try{
 
-            userDTO = userRepository.findUserByMailAndPassword(eMail, password);
+            myUser = userRepository.findUserByMailAndPassword(eMail, password);
         }catch ( org.springframework.dao.DataAccessResourceFailureException e ) {
 
             throw new DatabaseUserException("A failure occured while trying to connect to database with JPA");
         }
-        return userDTO;
+        return myUser;
     }
 }

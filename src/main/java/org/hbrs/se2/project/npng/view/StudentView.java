@@ -9,7 +9,6 @@ import org.hbrs.se2.project.npng.view.layoutview.StudentLayoutview;
 @PageTitle("No-Pain_No-Gain")
 
 public class StudentView extends VerticalLayout {
-
     public StudentView(){
     }
 }

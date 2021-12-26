@@ -1,9 +1,12 @@
 package org.hbrs.se2.project.npng.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "user", schema = "coll", catalog = "zmkass2s")
+
 public class User {
 
     //values for role
@@ -24,7 +27,8 @@ public class User {
     private Student student;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
+    @GenericGenerator(name="native",strategy = "native")
     @Column(name = "id")
     public int getId() {
         return id;
@@ -142,8 +146,7 @@ public class User {
         this.student = student;
     }
 
-    //@Override
-    /*
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -151,7 +154,7 @@ public class User {
         User user = (User) o;
 
         if (id != user.id) return false;
-        if (eMail != null ? !eMail.equals(user.eMail) : user.eMail != null) return false;
+        if (mail != null ? !mail.equals(user.mail) : user.mail != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (street != null ? !street.equals(user.street) : user.street != null) return false;
         if (houseNumber != null ? !houseNumber.equals(user.houseNumber) : user.houseNumber != null) return false;
@@ -167,7 +170,7 @@ public class User {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (eMail != null ? eMail.hashCode() : 0);
+        result = 31 * result + (mail != null ? mail.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (street != null ? street.hashCode() : 0);
         result = 31 * result + (houseNumber != null ? houseNumber.hashCode() : 0);
@@ -178,5 +181,5 @@ public class User {
         result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;
     }
-    */
+
 }

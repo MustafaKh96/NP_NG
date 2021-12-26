@@ -1,6 +1,7 @@
 package org.hbrs.se2.project.npng.repository.impl;
 
 import org.hbrs.se2.project.npng.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -10,26 +11,8 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 @Repository
-public class UserInsertRepository {
+public interface UserInsertRepository extends JpaRepository<User, Integer> {
 
-    @PersistenceContext
-    private EntityManager entityManager;
-    //private EntityManagerFactory emFactory;
 
-    public UserInsertRepository(){
 
-        //emFactory = Persistence.createEntityManagerFactory("test");
-        //entityManager = emFactory.createEntityManager();
-    }
-
-    @Transactional
-    public void insert(User user){
-
-        entityManager.getTransaction().begin();
-        this.entityManager.persist(user);
-        entityManager.getTransaction().commit();
-        //this.entityManager.flush();
-
-        entityManager.close();
-    }
 }

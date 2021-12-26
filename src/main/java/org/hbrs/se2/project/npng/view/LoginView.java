@@ -2,6 +2,7 @@ package org.hbrs.se2.project.npng.view;
 
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.login.LoginI18n;
@@ -19,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Route("Login")
 @PageTitle("No-Pain_No-Gain")
-//@CssImport("./themes/nopainnogain/components/Login.css")
+@CssImport("./themes/nopainnogain/components/Login.css")
 
 public class LoginView extends VerticalLayout {
 
@@ -45,10 +46,8 @@ public class LoginView extends VerticalLayout {
             boolean isAuthentificated = false;
 
             try{
-
                 isAuthentificated = loginController.authentificate(e.getUsername(), e.getPassword());
             } catch (DatabaseUserException databaseException){
-
                 Dialog dialog = new Dialog();
                 dialog.add( new Text( databaseException.getReason()) );
                 dialog.setWidth("400px");
@@ -57,15 +56,11 @@ public class LoginView extends VerticalLayout {
             }
 
             if (isAuthentificated){
-
                 this.initializeSessionWithUser();
-
-                if(loginController.getCurrentUser().getRole() == User.STUDENT){
-
+                if(loginController.getCurrentUser().getRole().equals("student")){
                     UI.getCurrent().navigate(StudentView.class);
                 }
                 else{
-
                     UI.getCurrent().navigate(CompanyView.class);
                 }
             }
@@ -77,8 +72,7 @@ public class LoginView extends VerticalLayout {
     }
 
     private void initializeSessionWithUser(){
-
-        UserDTO userDTO = loginController.getCurrentUser();
-        UI.getCurrent().getSession().setAttribute(Globals.CURRENT_USER, userDTO);
+        User user = loginController.getCurrentUser();
+        UI.getCurrent().getSession().setAttribute(Globals.CURRENT_USER, user);
     }
 }

@@ -1,27 +1,44 @@
 package org.hbrs.se2.project.npng.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Table(name = "student", schema = "coll", catalog = "zmkass2s")
+
 public class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
+    @GenericGenerator(name="native",strategy = "native")
+    @Column(name = "id")
     private int id;
+    @Basic
+    @Column(name = "first_name")
     private String firstName;
+    @Basic
+    @Column(name = "last_name")
     private String lastName;
+    @Basic
+    @Column(name = "highest_diploma")
     private String highestDiploma;
     private String education;
+    @Basic
+    @Column(name = "study_course")
     private String studyCourse;
-    private LocalDate birthday;
+    @Basic
+    @Column(name = "birthday")
+    private Date birthday;
+    @OneToMany(mappedBy = "student")
     private List<ApplicationLetter> applicationLetters;
+    @OneToMany(mappedBy = "student")
     private List<Skills> skills;
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -30,8 +47,7 @@ public class Student {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "first_name")
+
     public String getFirstName() {
         return firstName;
     }
@@ -40,8 +56,6 @@ public class Student {
         this.firstName = firstName;
     }
 
-    @Basic
-    @Column(name = "last_name")
     public String getLastName() {
         return lastName;
     }
@@ -50,8 +64,7 @@ public class Student {
         this.lastName = lastName;
     }
 
-    @Basic
-    @Column(name = "highest_diploma")
+
     public String getHighestDiploma() {
         return highestDiploma;
     }
@@ -60,8 +73,7 @@ public class Student {
         this.highestDiploma = highestDiploma;
     }
 
-    @Basic
-    @Column(name = "education")
+
     public String getEducation() {
         return education;
     }
@@ -70,8 +82,7 @@ public class Student {
         this.education = education;
     }
 
-    @Basic
-    @Column(name = "study_course")
+
     public String getStudyCourse() {
         return studyCourse;
     }
@@ -80,17 +91,16 @@ public class Student {
         this.studyCourse = studyCourse;
     }
 
-    @Basic
-    @Column(name = "birthday")
-    public LocalDate getBirthday() {
+
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
-    @OneToMany(mappedBy = "student")
+
     public List<ApplicationLetter> getApplicationLetters() {
         return this.applicationLetters;
     }
@@ -99,7 +109,7 @@ public class Student {
         this.applicationLetters = applicationLetters;
     }
 
-    @OneToMany(mappedBy = "student")
+
     public List<Skills> getSkills() {
         return skills;
     }
@@ -108,8 +118,7 @@ public class Student {
         this.skills = skills;
     }
 
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+
     public User getUser() {
         return this.user;
     }
@@ -118,7 +127,7 @@ public class Student {
         this.user = user;
     }
 
-    /*
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -149,6 +158,5 @@ public class Student {
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         return result;
     }
-    */
 
 }
