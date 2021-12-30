@@ -15,7 +15,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="entityManagerFactory" />
+          <factory-entry name="entityManagerFactory" value="44c7b30e-1414-4424-93d2-099abf550b62" />
           <factory-entry name="inf_se2_2021_No-Pain_No-Gain" value="9603771f-8556-45e2-9327-6c060da084c6" />
           <factory-entry name="noname-a.xml@0" value="8d252560-0f53-4e4d-8ebe-014316016984" />
         </datasource-mapping>

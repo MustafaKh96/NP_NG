@@ -103,6 +103,18 @@ public class RegisterUnternehmerView extends VerticalLayout {
         layout_dialog4.add(text4, closeButton4);
         dialog4.add(layout_dialog4);
 
+        Dialog dialog5 = new Dialog();
+        Paragraph text5 = new Paragraph("Herzlich willkommen bei No-Pain_No-Gain: Sie habe sich erfolgreich registriert :)");
+        Button closeButton5_1 = new Button("Zurück");
+        Button loginButton5_2 = new Button("zu Login");
+        closeButton5_1.addClickListener(e -> dialog5.close());
+        loginButton5_2.addClickListener(e -> UI.getCurrent().navigate(LoginView.class));
+        HorizontalLayout layout_h_dialog5 = new HorizontalLayout();
+        layout_h_dialog5.add(closeButton5_1,loginButton5_2);
+        VerticalLayout layout_dialog5 = new VerticalLayout();
+        layout_dialog5.add(text5, layout_h_dialog5);
+        dialog5.add(layout_dialog5);
+
         // Butten erstellen:
         Button registrieren = new Button("registrieren");
         Button zurueck = new Button("Zurück");
@@ -145,6 +157,7 @@ public class RegisterUnternehmerView extends VerticalLayout {
                     company.setFoundingYear("");
                     company.setUser(user);
                     companyRepository.save(company);
+                    dialog5.open();
                 }
             } catch (DatabaseLayerException e) {
                 e.printStackTrace();

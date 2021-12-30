@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -30,7 +31,7 @@ public class Student {
     private String studyCourse;
     @Basic
     @Column(name = "birthday")
-    private Date birthday;
+    private LocalDate birthday;
     @OneToMany(mappedBy = "student")
     private List<ApplicationLetter> applicationLetters;
     @OneToMany(mappedBy = "student")
@@ -92,11 +93,11 @@ public class Student {
     }
 
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 

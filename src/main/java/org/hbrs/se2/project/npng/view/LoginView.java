@@ -40,6 +40,7 @@ public class LoginView extends VerticalLayout {
         LoginI18n i18n = LoginI18n.createDefault();
         component.setI18n(i18n);
         component.setOpened(true);
+        component.setDescription("");
 
         component.addLoginListener(e -> {
 

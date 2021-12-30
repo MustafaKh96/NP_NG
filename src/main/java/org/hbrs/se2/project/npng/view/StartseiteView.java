@@ -62,18 +62,23 @@ public class StartseiteView extends VerticalLayout{
         unternehmerRegistrieren.addClickListener(e -> {
             navigateToRegisterUnternehmerView();
                 });
+        unternehmerRegistrieren.setClassName("Button");
         // Für Student:
         studentRgistrieren = new Button("Student registrieren");
         studentRgistrieren.addClickListener(e -> {
             navigateToRegisterStudentView();
         });
+        studentRgistrieren.setClassName("Button");
         // Für Login:
         login = new Button("Login");
         login.addClickListener(e -> {
             navigateToLogin();
         });
+        login.setClassName("Button");
+
         add(unternehmerRegistrieren, studentRgistrieren, login);
     }
+
 
     private void navigateToRegisterUnternehmerView(){
         UI.getCurrent().navigate(RegisterUnternehmerView.class);

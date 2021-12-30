@@ -25,6 +25,7 @@ public class User {
     private String role;
     private Company company;
     private Student student;
+    private String geschlecht;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
@@ -117,6 +118,17 @@ public class User {
     public void setContactMail(String contactMail) {
         this.contactMail = contactMail;
     }
+
+    @Basic
+    @Column(name = "geschlecht")
+    public String getGeschlecht(){
+        return geschlecht;
+    }
+    public void setGeschlecht(String geschlecht){
+        this.geschlecht = geschlecht;
+    }
+
+
 
     @Basic
     @Column(name = "role")
