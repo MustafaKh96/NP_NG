@@ -45,7 +45,8 @@ public class StudentLayoutview extends AppLayout  {
         MenuItem home = projectSubMenu.addItem(new Button("Home",new Icon(VaadinIcon.HOME)));
         MenuItem einstellungen = projectSubMenu.addItem(new Button("Einstellung",new Icon(VaadinIcon.COG)));
         MenuItem bewerbungen = projectSubMenu.addItem(new Button("Meine Bewerbungen",new Icon(VaadinIcon.ENVELOPES)));
-        MenuItem logout = projectSubMenu.addItem(new Button("Logout",new Icon(VaadinIcon.SIGN_OUT)));
+        MenuItem logout = projectSubMenu.addItem(new Button("Logout",new Icon(VaadinIcon.SIGN_OUT)),e -> logoutUser());
+
         Button meinProfil = new Button("mein Profil",new Icon(VaadinIcon.USER));
         meinProfil.addClickListener(e -> navigateToStudentProfilView());
         // Icon erstellen:
@@ -67,6 +68,12 @@ public class StudentLayoutview extends AppLayout  {
         verticalLayout.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.END);
         return verticalLayout;
     }
+    private void logoutUser() {
+        UI ui = this.getUI().get();
+        ui.getSession().close();
+        ui.getPage().setLocation("/");
+    }
+
     private void navigateToStudentProfilView(){
         UI.getCurrent().navigate(StudentProfilView.class);
     }

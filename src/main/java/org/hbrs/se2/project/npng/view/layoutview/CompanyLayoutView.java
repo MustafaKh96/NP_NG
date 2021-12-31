@@ -47,7 +47,8 @@ public class CompanyLayoutView extends AppLayout {
         MenuItem anzeigen = projectSubMenu.addItem(new Button("Meine Anzeigen",new Icon(VaadinIcon.CLIPBOARD_TEXT)));
         MenuItem bewerbungen = projectSubMenu.addItem(new Button("Bewerbungen",new Icon(VaadinIcon.ENVELOPES)));
         MenuItem logout = projectSubMenu.addItem(new Button("Logout",new Icon(VaadinIcon.SIGN_OUT)));
-        Button meinProfil = new Button("Unternehmer_Profil",new Icon(VaadinIcon.USER));
+        Button meinProfil = new Button("Unternehmer Profil",new Icon(VaadinIcon.USER));
+
         meinProfil.addClickListener(e -> navigateToUnternehmerProfilView());
         // Layout:
         HorizontalLayout layout = new HorizontalLayout();
