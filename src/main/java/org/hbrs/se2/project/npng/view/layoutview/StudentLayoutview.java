@@ -16,6 +16,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.dom.ThemeList;
 import com.vaadin.flow.theme.lumo.Lumo;
 import org.hbrs.se2.project.npng.view.StudentProfilView;
+import org.hbrs.se2.project.npng.view.StudentView;
 
 public class StudentLayoutview extends AppLayout  {
     MenuBar menuBar = new MenuBar();
@@ -43,6 +44,7 @@ public class StudentLayoutview extends AppLayout  {
         MenuItem project = menuBar.addItem(new Icon(VaadinIcon.LINES));
         SubMenu projectSubMenu = project.getSubMenu();
         MenuItem home = projectSubMenu.addItem(new Button("Home",new Icon(VaadinIcon.HOME)));
+        home.addClickListener(e -> navigateToStudentView());
         MenuItem einstellungen = projectSubMenu.addItem(new Button("Einstellung",new Icon(VaadinIcon.COG)));
         MenuItem bewerbungen = projectSubMenu.addItem(new Button("Meine Bewerbungen",new Icon(VaadinIcon.ENVELOPES)));
         MenuItem logout = projectSubMenu.addItem(new Button("Logout",new Icon(VaadinIcon.SIGN_OUT)),e -> logoutUser());
@@ -76,5 +78,8 @@ public class StudentLayoutview extends AppLayout  {
 
     private void navigateToStudentProfilView(){
         UI.getCurrent().navigate(StudentProfilView.class);
+    }
+    private void navigateToStudentView(){
+        UI.getCurrent().navigate(StudentView.class);
     }
 }

@@ -13,6 +13,8 @@ import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import org.hbrs.se2.project.npng.view.CompanyView;
+import org.hbrs.se2.project.npng.view.StudentView;
 import org.hbrs.se2.project.npng.view.UnternehmerProfilView;
 
 
@@ -43,10 +45,11 @@ public class CompanyLayoutView extends AppLayout {
         MenuItem project = menuBar.addItem(new Icon(VaadinIcon.LINES));
         SubMenu projectSubMenu = project.getSubMenu();
         MenuItem home = projectSubMenu.addItem(new Button("Home",new Icon(VaadinIcon.HOME)));
+        home.addClickListener(e -> navigateToCompanyView());
         MenuItem einstellungen = projectSubMenu.addItem(new Button("Einstellung",new Icon(VaadinIcon.COG)));
         MenuItem anzeigen = projectSubMenu.addItem(new Button("Meine Anzeigen",new Icon(VaadinIcon.CLIPBOARD_TEXT)));
         MenuItem bewerbungen = projectSubMenu.addItem(new Button("Bewerbungen",new Icon(VaadinIcon.ENVELOPES)));
-        MenuItem logout = projectSubMenu.addItem(new Button("Logout",new Icon(VaadinIcon.SIGN_OUT)));
+        MenuItem logout = projectSubMenu.addItem(new Button("Logout",new Icon(VaadinIcon.SIGN_OUT)),e -> logoutUser());
         Button meinProfil = new Button("Unternehmer Profil",new Icon(VaadinIcon.USER));
 
         meinProfil.addClickListener(e -> navigateToUnternehmerProfilView());
@@ -59,7 +62,18 @@ public class CompanyLayoutView extends AppLayout {
         verticalLayout.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.END);
         return verticalLayout;
     }
+
+    private void logoutUser() {
+        UI ui = this.getUI().get();
+        ui.getSession().close();
+        ui.getPage().setLocation("/");
+    }
+
+
     private void navigateToUnternehmerProfilView(){
         UI.getCurrent().navigate(UnternehmerProfilView.class);
+    }
+    private void navigateToCompanyView(){
+        UI.getCurrent().navigate(CompanyView.class);
     }
 }
