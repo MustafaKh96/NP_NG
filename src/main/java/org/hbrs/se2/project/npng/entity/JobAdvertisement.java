@@ -13,6 +13,7 @@ public class JobAdvertisement {
     private String typeOfJobHiring;
     private Date startDate;
     private String description;
+    private int company_id;
     private List<ApplicationLetter> applicationLetters;
     private List<Skills> skills;
     private Company company;
@@ -73,10 +74,13 @@ public class JobAdvertisement {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
+
+
+
+
 
     @OneToMany(mappedBy = "jobAdvertisement")
     public List<ApplicationLetter> getApplicationLetters() {
@@ -102,37 +106,5 @@ public class JobAdvertisement {
 
     public void setCompany(Company company){ this.company = company; };
 
-    /*
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        JobAdvertisement that = (JobAdvertisement) o;
-
-        if (id != that.id) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
-        if (sector != null ? !sector.equals(that.sector) : that.sector != null) return false;
-        if (typeOfJobHiring != null ? !typeOfJobHiring.equals(that.typeOfJobHiring) : that.typeOfJobHiring != null)
-            return false;
-        if (startDate != null ? !startDate.equals(that.startDate) : that.startDate != null) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (sector != null ? sector.hashCode() : 0);
-        result = 31 * result + (typeOfJobHiring != null ? typeOfJobHiring.hashCode() : 0);
-        result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        return result;
-    }
-
-
-
-     */
 }

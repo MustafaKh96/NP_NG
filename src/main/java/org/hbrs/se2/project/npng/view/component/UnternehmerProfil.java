@@ -4,6 +4,7 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
@@ -43,7 +44,9 @@ public class UnternehmerProfil extends VerticalLayout {
         layout_1.add(Hauptsitz, anzahl_Angestellten,gruendungsjahr,branche);
         getCancel().setId("cancel_save");
         getSave().setId("cancel_save");
-        layout_1.add(cancel,save);
+        HorizontalLayout horizontalLayout = new HorizontalLayout();
+        horizontalLayout.add(getCancel(),getSave());
+        layout_1.add(horizontalLayout);
         add(layout_1);
     }
 

@@ -2,8 +2,6 @@ package org.hbrs.se2.project.npng.view;
 
 
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.hbrs.se2.project.npng.view.component.UnternehmerProfil;
