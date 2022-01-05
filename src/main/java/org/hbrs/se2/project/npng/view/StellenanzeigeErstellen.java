@@ -82,6 +82,7 @@ public class StellenanzeigeErstellen extends VerticalLayout {
         cancel.setId("cancel_save");
         save.setId("cancel_save");
         save.addClickListener(e -> dialogs());
+        cancel.addClickListener(e -> UI.getCurrent().navigate(CompanyView.class));
         add(layout_1);
     }
 
@@ -89,7 +90,7 @@ public class StellenanzeigeErstellen extends VerticalLayout {
         List<JobAdvertisement> list = new ArrayList<>();
         jobAdvertisement.setTitle(title.getValue());
         jobAdvertisement.setSector(sector.getValue());
-        jobAdvertisement.setStartDate(Date.valueOf(datum.getValue()));
+        jobAdvertisement.setStartDate(datum.getValue());
         jobAdvertisement.setTypeOfJobHiring(art.getValue());
         jobAdvertisement.setDescription(textArea.getValue());
         jobAdvertisement.setCompany(company);

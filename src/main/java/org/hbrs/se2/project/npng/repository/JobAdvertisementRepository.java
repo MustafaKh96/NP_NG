@@ -9,6 +9,9 @@ import java.util.List;
 
 @Repository
 public interface JobAdvertisementRepository extends JpaRepository<JobAdvertisement, Integer> {
-    //List<JobAdvertisement> findAllByCompany_id(int company_id);
+    List<JobAdvertisement> findAllByCompany_id(int company_id);
     List<JobAdvertisement> findJobAdvertisementsByCompany_id(int company_id);
+    List<JobAdvertisement> findAllByTitle(String str);
+    List<JobAdvertisement> findAllBySector(String str);
+    List<JobAdvertisement> findAllByTitleOrSector(String str1, String str2);
 }

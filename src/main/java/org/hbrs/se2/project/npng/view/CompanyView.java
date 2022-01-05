@@ -61,7 +61,7 @@ public class CompanyView extends VerticalLayout {
         Button button = new Button("View details",
                 new Icon(VaadinIcon.ANGLE_DOUBLE_RIGHT));
         button.addThemeVariants(ButtonVariant.LUMO_SMALL);
-        button.addClickListener(e -> UI.getCurrent().navigate(StellenanzeigenVerwalten.class));
+        button.addClickListener(e -> navigateToStellenanzeigenVerwalten());
 
         layout.getElement().getStyle().set("flex-grow", "1");
         layout.add(header, content, button);
@@ -70,6 +70,9 @@ public class CompanyView extends VerticalLayout {
 
     private void navigateToStellenanzeigeErstellen(){
         UI.getCurrent().navigate(StellenanzeigeErstellen.class);
+    }
+    private void navigateToStellenanzeigenVerwalten(){
+        UI.getCurrent().navigate(StellenanzeigenVerwalten.class);
     }
     private JobAdvertisement getCurrentAnzeige() {
         UI.getCurrent().getSession().setAttribute(Globals.CURRENT_ANZEIGE, jobAdvertisement);

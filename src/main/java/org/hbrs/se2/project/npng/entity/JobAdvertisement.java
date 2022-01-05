@@ -2,6 +2,7 @@ package org.hbrs.se2.project.npng.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -11,7 +12,7 @@ public class JobAdvertisement {
     private String title;
     private String sector;
     private String typeOfJobHiring;
-    private Date startDate;
+    private LocalDate startDate;
     private String description;
     private int company_id;
     private List<ApplicationLetter> applicationLetters;
@@ -61,11 +62,11 @@ public class JobAdvertisement {
 
     @Basic
     @Column(name = "start_date")
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
