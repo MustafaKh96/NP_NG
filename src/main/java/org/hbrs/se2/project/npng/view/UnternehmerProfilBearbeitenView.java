@@ -25,6 +25,7 @@ public class UnternehmerProfilBearbeitenView extends UnternehmerProfil {
     private Dialog dialog5 = new Dialog();
     private Dialog dialog4 = new Dialog();
 
+
     public UnternehmerProfilBearbeitenView(UserRepository userRepository, CompanyRepository companyRepository) {
 
         this.userRepository = userRepository;

@@ -1,6 +1,7 @@
 package org.hbrs.se2.project.npng.view.layoutview;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.button.Button;
@@ -13,12 +14,21 @@ import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.dom.ThemeList;
+import com.vaadin.flow.theme.lumo.Lumo;
+import org.hbrs.se2.project.npng.entity.Company;
+import org.hbrs.se2.project.npng.entity.User;
+import org.hbrs.se2.project.npng.util.Globals;
+import org.hbrs.se2.project.npng.view.CompanyView;
+import org.hbrs.se2.project.npng.view.StellenanzeigenVerwalten;
 import org.hbrs.se2.project.npng.view.UnternehmerProfilView;
 
 
 
 public class CompanyLayoutView extends AppLayout {
     MenuBar menuBar = new MenuBar();
+    private User user = (User) UI.getCurrent().getSession().getAttribute(Globals.CURRENT_USER);
+    private Company company = user.getCompany();
 
 
     public CompanyLayoutView(){
@@ -43,16 +53,31 @@ public class CompanyLayoutView extends AppLayout {
         MenuItem project = menuBar.addItem(new Icon(VaadinIcon.LINES));
         SubMenu projectSubMenu = project.getSubMenu();
         MenuItem home = projectSubMenu.addItem(new Button("Home",new Icon(VaadinIcon.HOME)));
-        MenuItem einstellungen = projectSubMenu.addItem(new Button("Einstellung",new Icon(VaadinIcon.COG)));
+        home.addClickListener(e -> UI.getCurrent().navigate(CompanyView.class));
         MenuItem anzeigen = projectSubMenu.addItem(new Button("Meine Anzeigen",new Icon(VaadinIcon.CLIPBOARD_TEXT)));
+        anzeigen.addClickListener(e -> UI.getCurrent().navigate(StellenanzeigenVerwalten.class));
         MenuItem bewerbungen = projectSubMenu.addItem(new Button("Bewerbungen",new Icon(VaadinIcon.ENVELOPES)));
-        MenuItem logout = projectSubMenu.addItem(new Button("Logout",new Icon(VaadinIcon.SIGN_OUT)),e -> logoutUser());
-        Button meinProfil = new Button("Unternehmer Profil",new Icon(VaadinIcon.USER));
 
-        meinProfil.addClickListener(e -> navigateToUnternehmerProfilView());
+        MenuItem meinprofiel = projectSubMenu.addItem(new Button("mein Profil",new Icon(VaadinIcon.USER)));
+        meinprofiel.addClickListener(e -> navigateToUnternehmerProfilView());
+        MenuItem einstellungen = projectSubMenu.addItem(new Button("Einstellung",new Icon(VaadinIcon.COG)));
+
+        MenuItem logout = projectSubMenu.addItem(new Button("Logout",new Icon(VaadinIcon.SIGN_OUT)),e -> logoutUser());
+        Text text = new Text("Hallo " + company.getName());
+
+        // Icon erstellen:
+        Icon theme = new Icon(VaadinIcon.ADJUST);
+        theme.addClickListener(iconClickEvent -> {
+            ThemeList themeList = UI.getCurrent().getElement().getThemeList();
+            if (themeList.contains(Lumo.DARK)) {
+                themeList.remove(Lumo.DARK);
+            } else {
+                themeList.add(Lumo.DARK);
+            }
+        });
         // Layout:
         HorizontalLayout layout = new HorizontalLayout();
-        layout.add(meinProfil,menuBar);
+        layout.add(text, theme, menuBar);
         layout.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
         VerticalLayout verticalLayout = new VerticalLayout();
         verticalLayout.add(layout);
@@ -63,7 +88,7 @@ public class CompanyLayoutView extends AppLayout {
     private void logoutUser() {
         UI ui = this.getUI().get();
         ui.getSession().close();
-        ui.getPage().setLocation("/");
+        ui.getPage().setLocation("/Login");
     }
     private void navigateToUnternehmerProfilView(){
         UI.getCurrent().navigate(UnternehmerProfilView.class);

@@ -1,11 +1,15 @@
 package org.hbrs.se2.project.npng.view.layoutview;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.contextmenu.SubMenu;
+import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.html.H4;
+import com.vaadin.flow.component.html.H5;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -15,11 +19,18 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.dom.ThemeList;
 import com.vaadin.flow.theme.lumo.Lumo;
+import org.hbrs.se2.project.npng.entity.Student;
+import org.hbrs.se2.project.npng.entity.User;
+import org.hbrs.se2.project.npng.util.Globals;
+import org.hbrs.se2.project.npng.view.Einstellung;
+import org.hbrs.se2.project.npng.view.StudentBewerbungView;
 import org.hbrs.se2.project.npng.view.StudentProfilView;
 import org.hbrs.se2.project.npng.view.StudentView;
 
 public class StudentLayoutview extends AppLayout  {
     MenuBar menuBar = new MenuBar();
+    private User user = (User) UI.getCurrent().getSession().getAttribute(Globals.CURRENT_USER);
+    private Student student = user.getStudent();
 
 
     public StudentLayoutview(){
@@ -45,12 +56,14 @@ public class StudentLayoutview extends AppLayout  {
         SubMenu projectSubMenu = project.getSubMenu();
         MenuItem home = projectSubMenu.addItem(new Button("Home",new Icon(VaadinIcon.HOME)));
         home.addClickListener(e -> navigateToStudentView());
-        MenuItem einstellungen = projectSubMenu.addItem(new Button("Einstellung",new Icon(VaadinIcon.COG)));
         MenuItem bewerbungen = projectSubMenu.addItem(new Button("Meine Bewerbungen",new Icon(VaadinIcon.ENVELOPES)));
+        bewerbungen.addClickListener(e -> UI.getCurrent().navigate(StudentBewerbungView.class));
+        MenuItem mienprofiel = projectSubMenu.addItem(new Button("mein Profil",new Icon(VaadinIcon.USER)));
+        mienprofiel.addClickListener(e -> UI.getCurrent().navigate(StudentProfilView.class));
+        MenuItem einstellungen = projectSubMenu.addItem(new Button("Einstellung",new Icon(VaadinIcon.COG)));
+        einstellungen.addClickListener(e -> UI.getCurrent().navigate(Einstellung.class));
         MenuItem logout = projectSubMenu.addItem(new Button("Logout",new Icon(VaadinIcon.SIGN_OUT)),e -> logoutUser());
 
-        Button meinProfil = new Button("mein Profil",new Icon(VaadinIcon.USER));
-        meinProfil.addClickListener(e -> navigateToStudentProfilView());
         // Icon erstellen:
         Icon theme = new Icon(VaadinIcon.ADJUST);
         theme.addClickListener(iconClickEvent -> {
@@ -63,7 +76,8 @@ public class StudentLayoutview extends AppLayout  {
         });
         // Layout:
         HorizontalLayout layout = new HorizontalLayout();
-        layout.add(theme,meinProfil,menuBar);
+        Text text = new Text("Hallo " + student.getFirstName());
+        layout.add(text, theme, menuBar);
         layout.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
         VerticalLayout verticalLayout = new VerticalLayout();
         verticalLayout.add(layout);
@@ -73,7 +87,7 @@ public class StudentLayoutview extends AppLayout  {
     private void logoutUser() {
         UI ui = this.getUI().get();
         ui.getSession().close();
-        ui.getPage().setLocation("/");
+        ui.getPage().setLocation("/Login");
     }
 
     private void navigateToStudentProfilView(){

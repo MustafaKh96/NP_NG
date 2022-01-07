@@ -8,21 +8,23 @@ import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.login.LoginI18n;
 import com.vaadin.flow.component.login.LoginOverlay;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.hbrs.se2.project.npng.controller.LoginController;
 import org.hbrs.se2.project.npng.controller.exception.DatabaseUserException;
-import org.hbrs.se2.project.npng.dto.UserDTO;
 import org.hbrs.se2.project.npng.entity.User;
 import org.hbrs.se2.project.npng.util.Globals;
 import org.springframework.beans.factory.annotation.Autowired;
+
 
 
 @Route("Login")
 @PageTitle("No-Pain_No-Gain")
 @CssImport("./themes/nopainnogain/components/Login.css")
 
-public class LoginView extends VerticalLayout {
+public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
     @Autowired
     private LoginController loginController;
@@ -71,6 +73,19 @@ public class LoginView extends VerticalLayout {
         });
         add(component);
     }
+
+    private User getCurrentUser() {
+        return (User) UI.getCurrent().getSession().getAttribute(Globals.CURRENT_USER);
+    }
+
+
+    @Override
+    public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
+        if (getCurrentUser() == null){
+            beforeEnterEvent.rerouteTo(Globals.Pages.LOGIN_VIEW);
+        }
+    }
+
 
     private void initializeSessionWithUser(){
         User user = loginController.getCurrentUser();

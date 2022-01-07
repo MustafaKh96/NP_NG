@@ -21,7 +21,6 @@ import org.hbrs.se2.project.npng.repository.JobAdvertisementRepository;
 import org.hbrs.se2.project.npng.util.Globals;
 import org.hbrs.se2.project.npng.view.layoutview.CompanyLayoutView;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,11 +1,15 @@
 package org.hbrs.se2.project.npng.view;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Html;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -18,10 +22,10 @@ import org.hbrs.se2.project.npng.entity.User;
 import org.hbrs.se2.project.npng.util.Globals;
 import org.hbrs.se2.project.npng.view.layoutview.CompanyLayoutView;
 
-import java.util.List;
 
 @Route(value = "UnternehmerView",layout = CompanyLayoutView.class)
 @PageTitle("No-Pain_No-Gain")
+@CssImport("./themes/nopainnogain/components/ProfilBearbeiten.css")
 
 public class CompanyView extends VerticalLayout {
     private User user = (User) UI.getCurrent().getSession().getAttribute(Globals.CURRENT_USER);
@@ -34,19 +38,40 @@ public class CompanyView extends VerticalLayout {
         stellenAnz.addClickListener(e -> navigateToStellenanzeigeErstellen());
         stellenAnz.getStyle().set("width","300px");
         stellenAnz.getStyle().set("height","50px");
-        setDefaultHorizontalComponentAlignment(Alignment.CENTER);
+        setHorizontalComponentAlignment(Alignment.CENTER, stellenAnz);
         add(stellenAnz);
 
-        String mienStellenanzeigen = "Meine Stellenanzeigen";
+        H2 mienStellenanzeigen = new H2("Meine Stellenanzeigen");
+        H2 bewerbungen =  new H2("Bewerbungen");
 
-        String Bewcont = "Sie Können Sie Ihre Stellenanzeigen anschauen und bearbeiten. \n"
-                + "wählen sie v" ;
+        bewerbungen.setWidth("100%");
+        mienStellenanzeigen.setWidth("100%");
+        String Bewcont = "<div>Sie Können Sie Ihre Stellenanzeigen anschauen und<br>bearbeiten (ändern, löschen usw.).</div>";
+        String Bewcont2 = "<div>Sie Können Ihre erhaltenen Bewerbungen<br>anschauen und den pas  senden Studenten finden.</div>";
+        Html html = new Html(Bewcont);
+        Html html2 = new Html(Bewcont2);
+        VerticalLayout layout11 = new VerticalLayout();
+        layout11.add(mienStellenanzeigen);
+        //layout11.setHorizontalComponentAlignment(Alignment.CENTER, mienStellenanzeigen);
+        layout11.add(html);
+        Button b1 = new Button("Details anzeigen");
+        b1.setId("cancel_save");
+        //layout11.setHorizontalComponentAlignment(Alignment.CENTER, b1);
+        b1.addClickListener(e -> UI.getCurrent().navigate(StellenanzeigenVerwalten.class));
+        layout11.add(b1);
 
-        String erg_meineAnzeigen = company.getName();
-        Component card2 = createCard(mienStellenanzeigen, erg_meineAnzeigen);
-
+        VerticalLayout layout12 = new VerticalLayout();
+        layout12.add(bewerbungen);
+        //layout12.setHorizontalComponentAlignment(Alignment.CENTER, bewerbungen);
+        layout12.add(html2);
+        Button b2 = new Button("Details anzeigen");
+        b2.setId("cancel_save");
+        //layout12.setHorizontalComponentAlignment(Alignment.CENTER, b2);
+        //b2.addClickListener(e -> UI.getCurrent().navigate(  ));
+        layout12.add(b2);
         HorizontalLayout h_layout1 = new HorizontalLayout();
-        h_layout1.add( card2);
+        h_layout1.add(layout11, layout12);
+        //setHorizontalComponentAlignment(Alignment.CENTER, h_layout1);
         add(h_layout1);
     }
     private Component createCard(String cardHeader, String cardContent) {
