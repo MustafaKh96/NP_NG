@@ -124,7 +124,6 @@ public class StudentBewerbungView extends VerticalLayout {
         layout_1.add(ll1);
         dialog5.add(vl1);
 
-
         VerticalLayout layout1 = new VerticalLayout();
         H2 h3 = new H2("Mein Schreiben");
         layout1.add(h3);
@@ -135,7 +134,7 @@ public class StudentBewerbungView extends VerticalLayout {
         Button zuruck = new Button("Zurück");
         zuruck.setId("cancel_save");
         zuruck.addClickListener(e -> dialog4.close());
-        Button weiter = new Button("Weiter");
+        Button weiter = new Button("Anzeige anschauen");
         weiter.setId("cancel_save");
         weiter.addClickListener(e -> {
             dialog4.close();

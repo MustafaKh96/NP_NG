@@ -18,6 +18,7 @@ public class JobAdvertisement {
     private List<ApplicationLetter> applicationLetters;
     private List<Skills> skills;
     private Company company;
+    private int anzahl_bewerbungen;
 
     @Id
     @GeneratedValue
@@ -29,6 +30,16 @@ public class JobAdvertisement {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Basic
+    @Column(name = "anzahl_bewerbungen")
+    public int getAnzahl_bewerbungen(){
+        return anzahl_bewerbungen;
+    }
+    public void setAnzahl_bewerbungen(int i){
+        anzahl_bewerbungen = i;
+    }
+
 
     @Basic
     @Column(name = "title")

@@ -19,6 +19,8 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.apache.commons.lang3.StringUtils;
@@ -34,7 +36,7 @@ import java.util.List;
 @PageTitle("No-Pain_No-Gain")
 @CssImport("./themes/nopainnogain/components/ProfilBearbeiten.css")
 
-public class StudentView extends VerticalLayout {
+public class StudentView extends VerticalLayout{
 
     private TextField vorname = new TextField("Vorname");
     private TextField nachname = new TextField("Nachname");
@@ -69,7 +71,6 @@ public class StudentView extends VerticalLayout {
     private User user1 = (User) UI.getCurrent().getSession().getAttribute(Globals.CURRENT_USER);
     private Student student = user1.getStudent();
 
-
     private Dialog dialog4 = new Dialog();
     private Dialog dialog5 = new Dialog();
     private Dialog dialog6 = new Dialog();
@@ -79,7 +80,6 @@ public class StudentView extends VerticalLayout {
 
         this.jobAdvertisementRepository = jobAdvertisementRepository;
         this.applicationletterRepository = applicationletterRepository;
-
 
         HorizontalLayout h_layout = new HorizontalLayout();
         VerticalLayout v_layout = new VerticalLayout();
@@ -125,9 +125,8 @@ public class StudentView extends VerticalLayout {
         h_layout.add(comboNachWas ,comboNachWas2 ,comboNachWas3);
         setHorizontalComponentAlignment(Alignment.CENTER, h_layout);
 
-
         Button closeButton5_1 = new Button("Zurück");
-        Button loginButton5_2 = new Button("Weiter");
+        Button loginButton5_2 = new Button("bewerben");
         closeButton5_1.addClickListener(e -> dialog5.close());
 
         grid.addItemClickListener(e ->{
@@ -220,10 +219,12 @@ public class StudentView extends VerticalLayout {
         });
         Button schicken = new Button("Schicken");
         schicken.addClickListener( e -> {
+            jobAdvertisement.setAnzahl_bewerbungen(jobAdvertisement.getAnzahl_bewerbungen() + 1);//-------------------
             ApplicationLetter applicationLetter = new ApplicationLetter();
             applicationLetter.setStudent(student);
             applicationLetter.setJobAdvertisement(jobAdvertisement);
             applicationLetter.setText(textArea2.getValue());
+            jobAdvertisement = jobAdvertisementRepository.save(jobAdvertisement);
             applicationLetter = applicationletterRepository.save(applicationLetter);
 
             dialog6.close();
@@ -300,23 +301,5 @@ public class StudentView extends VerticalLayout {
         add(h_layout);
         add(grid);
 
-    }
-
-    private Component createCard(String cardHeader, String cardContent) {
-        VerticalLayout layout = new VerticalLayout();
-        layout.setWidth("30%");
-        layout.setMinWidth("250px");
-
-        H2 header = new H2(cardHeader);
-        Div content = new Div();
-        content.setText(cardContent);
-
-        Button button = new Button("View details",
-                new Icon(VaadinIcon.ANGLE_DOUBLE_RIGHT));
-        button.addThemeVariants(ButtonVariant.LUMO_SMALL);
-
-        layout.getElement().getStyle().set("flex-grow", "1");
-        layout.add(header, content, button);
-        return layout;
     }
 }

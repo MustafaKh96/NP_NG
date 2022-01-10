@@ -4,6 +4,8 @@ package org.hbrs.se2.project.npng.view;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import org.hbrs.se2.project.npng.entity.User;
+import org.hbrs.se2.project.npng.util.Globals;
 import org.hbrs.se2.project.npng.view.component.UnternehmerProfil;
 import org.hbrs.se2.project.npng.view.layoutview.CompanyLayoutView;
 
@@ -12,6 +14,7 @@ import org.hbrs.se2.project.npng.view.layoutview.CompanyLayoutView;
 
 public class UnternehmerProfilView extends UnternehmerProfil {
 
+    private User user = (User) UI.getCurrent().getSession().getAttribute(Globals.CURRENT_USER);
 
     public UnternehmerProfilView(){
 
@@ -41,7 +44,6 @@ public class UnternehmerProfilView extends UnternehmerProfil {
 
         getCancel().addClickListener(e -> UI.getCurrent().navigate(CompanyView.class));
         getSave().addClickListener(e -> navigateToUnternehmerProfilBearbeitenView());
-
 
     }
     private void navigateToUnternehmerProfilBearbeitenView(){
