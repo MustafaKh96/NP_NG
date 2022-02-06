@@ -68,6 +68,10 @@ public class StudentLayoutview extends AppLayout  {
         Button closeButton5_1 = new Button("nein");
         closeButton5_1.addClickListener(e -> dialog.close());
         Button loginButton5_2 = new Button("ja");
+        closeButton5_1.getStyle().set("background-color","dodgerblue");
+        closeButton5_1.getStyle().set("color","white");
+        loginButton5_2.getStyle().set("background-color","dodgerblue");
+        loginButton5_2.getStyle().set("color","white");
         HorizontalLayout layout_h_dialog5 = new HorizontalLayout();
         layout_h_dialog5.add(closeButton5_1, loginButton5_2);
         VerticalLayout layout_dialog5 = new VerticalLayout();

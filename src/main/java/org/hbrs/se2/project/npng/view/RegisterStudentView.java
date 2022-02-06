@@ -72,6 +72,8 @@ public class RegisterStudentView extends VerticalLayout {
         Paragraph text1 = new Paragraph("Registrierung fehlgeschlagen: Ein Nutzer mit dieser E-Mail existiert bereits.");
         text1.getStyle().set("color","red");
         Button closeButton = new Button("Zurück");
+        closeButton.getStyle().set("background-color","dodgerblue");
+        closeButton.getStyle().set("color","white");
         closeButton.addClickListener(e -> dialog.close());
         VerticalLayout layout_dialog = new VerticalLayout();
         layout_dialog.add(text1, closeButton);
@@ -81,6 +83,8 @@ public class RegisterStudentView extends VerticalLayout {
         Paragraph text2 = new Paragraph("Registrierung fehlgeschlagen: Die Passworte stimmen nicht überein.");
         text2.getStyle().set("color","red");
         Button closeButton2 = new Button("Zurück");
+        closeButton2.getStyle().set("background-color","dodgerblue");
+        closeButton2.getStyle().set("color","white");
         closeButton2.addClickListener(e -> dialog2.close());
         VerticalLayout layout_dialog2 = new VerticalLayout();
         layout_dialog2.add(text2, closeButton2);
@@ -90,6 +94,8 @@ public class RegisterStudentView extends VerticalLayout {
         Paragraph text3 = new Paragraph("Registrierung fehlgeschlagen: Das eingegebene Passwort ist kurz.");
         text3.getStyle().set("color","red");
         Button closeButton3 = new Button("Zurück");
+        closeButton3.getStyle().set("background-color","dodgerblue");
+        closeButton3.getStyle().set("color","white");
         closeButton3.addClickListener(e -> dialog3.close());
         VerticalLayout layout_dialog3 = new VerticalLayout();
         layout_dialog3.add(text3, closeButton3);
@@ -99,6 +105,8 @@ public class RegisterStudentView extends VerticalLayout {
         Paragraph text4 = new Paragraph("Registrierung fehlgeschlagen: Die eingegebene E-Mail ist falsch.");
         text4.getStyle().set("color","red");
         Button closeButton4 = new Button("Zurück");
+        closeButton4.getStyle().set("background-color","dodgerblue");
+        closeButton4.getStyle().set("color","white");
         closeButton4.addClickListener(e -> dialog4.close());
         VerticalLayout layout_dialog4 = new VerticalLayout();
         layout_dialog4.add(text4, closeButton4);
@@ -108,6 +116,10 @@ public class RegisterStudentView extends VerticalLayout {
         Paragraph text5 = new Paragraph("Herzlich willkommen bei No-Pain_No-Gain: Sie habe sich erfolgreich registriert :)");
         Button closeButton5_1 = new Button("Zurück");
         Button loginButton5_2 = new Button("zu Login");
+        closeButton5_1.getStyle().set("background-color","dodgerblue");
+        closeButton5_1.getStyle().set("color","white");
+        loginButton5_2.getStyle().set("background-color","dodgerblue");
+        loginButton5_2.getStyle().set("color","white");
         closeButton5_1.addClickListener(e -> dialog5.close());
         loginButton5_2.addClickListener(e -> UI.getCurrent().navigate(LoginView.class));
         HorizontalLayout layout_h_dialog5 = new HorizontalLayout();

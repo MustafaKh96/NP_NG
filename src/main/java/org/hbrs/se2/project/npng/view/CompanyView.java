@@ -90,7 +90,6 @@ public class CompanyView extends VerticalLayout {
     private DatePicker geburtsdatum = new DatePicker("Geburtsdatum");
     private EmailField email = new EmailField("E-Mail Adresse");
     private TextField phone = new TextField("Mobile-Nummer");
-    private TextField mobile = new TextField("Mobilenummer");
     private TextField studium = new TextField("Studium");
     private TextField hoechster_abschluss = new TextField("Höchster Abschluss");
     private TextField adresse = new TextField("Straße und Hausnummer");
