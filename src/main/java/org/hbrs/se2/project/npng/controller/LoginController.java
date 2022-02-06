@@ -1,7 +1,6 @@
 package org.hbrs.se2.project.npng.controller;
 
 import org.hbrs.se2.project.npng.controller.exception.DatabaseUserException;
-import org.hbrs.se2.project.npng.dto.UserDTO;
 import org.hbrs.se2.project.npng.entity.User;
 import org.hbrs.se2.project.npng.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
